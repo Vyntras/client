@@ -16,7 +16,7 @@ const CreateCardForm: FC = () => {
     const onSubmit: SubmitHandler<Omit<Card, 'createdAt' | 'id'>> = async (data) => {
         // console.log(data)
         try {
-            const response = await axios.post(`${API}/cards`, data);
+            const response = await axios.post(`/api/cards`, data);
             console.log('Server Response:', response.data);
         } catch (error) {
             console.error('There was an error!', error);
