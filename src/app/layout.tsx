@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { NextUIProvider } from "@nextui-org/system";
 
 
 
@@ -17,7 +18,9 @@ export default function RootLayout({
       <body>
         <div>jseifjesofiesjoij</div>
         {/* Layout UI */}
-        <main>{children}</main>
+        <NextUIProvider>
+          <main>{children}</main>
+        </NextUIProvider>
       </body>
     </html>
   )

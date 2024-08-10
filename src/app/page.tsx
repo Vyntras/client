@@ -1,8 +1,10 @@
-import { Card } from '@/types/Card';
+import { Card as ICard } from '@/types/Card';
 import { Metadata } from 'next';
 import { useState } from 'react';
 import CreateCardForm from './components/CreateCardForm';
 import { API } from '../../env.config';
+import Card from './components/Card';
+// import {getUserSession}
 
 
 export const metadata: Metadata = {
@@ -11,27 +13,33 @@ export const metadata: Metadata = {
 };
 
 const getCards = async () => {
+
+
   const response = await fetch(`${API}/cards`, { cache: 'no-store' })
 
-  if(!response.ok){
+  if (!response.ok) {
     throw new Error('Failed to fetch cards')
   }
 
   return response.json()
-} 
+}
 
 export default async function Home() {
 
   // const [input, setInput] = useState()
 
-  let cards: Card[] = await getCards()
+  let cards: ICard[] = await getCards()
 
   return (
     <main>
       <CreateCardForm />
-      {cards.map(card => (
-        <div className='p-3' key={String(card.id)}>{card.name}</div>
-      ))}
+
+      <div className='flex flex-wrap justify-center  gap-5'>
+        {cards.map(card => (
+          // <div className='p-3' key={String(card.id)}>{card.name}</div>
+          <Card key={String(card.id)} card={card} />
+        ))}
+      </div>
     </main>
   );
 }

@@ -3,8 +3,8 @@
 import { Card } from "@/types/Card";
 import { FC, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form"
-
 import { API } from "../../../env.config";
+import Cookies from 'js-cookie';
 
 
 const CreateCardForm: FC = () => {
@@ -14,14 +14,15 @@ const CreateCardForm: FC = () => {
     const { register, handleSubmit } = useForm<Omit<Card, 'createdAt' | 'id'>>()
 
     const onSubmit: SubmitHandler<Omit<Card, 'createdAt' | 'id'>> = async (data) => {
-        console.log(data)
+
         try {
             const response = await fetch(`${API}/cards`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
+                credentials: 'include',
             })
             console.log('Server Response:', await response.json());
         } catch (error) {
