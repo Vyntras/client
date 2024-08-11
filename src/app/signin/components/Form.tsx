@@ -11,7 +11,7 @@ const Form: FC = () => {
 
     const handleLogin = () => {
         const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-        const redirectUri = `${String(process.env.NEXT_PUBLIC_DOMAIN_CLIENT)}/api/auth/callback`;
+        const redirectUri = `${process.env.NODE_ENV === 'development' ? `${String(process.env.NEXT_PUBLIC_DOMAIN_API)}/auth/callback`:`${String(process.env.NEXT_PUBLIC_DOMAIN_CLIENT)}/api/auth/callback`}`;
         const scope = 'email profile';
         const responseType = 'code';
     

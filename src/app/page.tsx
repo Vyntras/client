@@ -30,6 +30,8 @@ export default async function Home() {
 
   let cards: ICard[] = await getCards()
 
+  console.log(cards)
+
   return (
     <main>
       <CreateCardForm />
